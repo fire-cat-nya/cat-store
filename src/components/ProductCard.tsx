@@ -22,6 +22,7 @@ export default function ProductCard({
   originalPrice,
   rating,
   reviewCount,
+  imageUrl,
   badge,
   colors = [],
 }: ProductCardProps) {
@@ -64,12 +65,13 @@ export default function ProductCard({
           />
         </button>
 
-        {/* Product image placeholder */}
-        <div className="h-64 bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-          <div className="text-center">
-            <div className="text-4xl mb-2">👙</div>
-            <p className="text-sm text-gray-600">ランジェリー</p>
-          </div>
+        {/* Product image */}
+        <div className="h-64 overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
 
         {/* Quick add to cart overlay */}
