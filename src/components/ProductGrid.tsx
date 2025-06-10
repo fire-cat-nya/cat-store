@@ -30,7 +30,7 @@ const sampleProducts = [
     originalPrice: 18200,
     rating: 4.3,
     reviewCount: 456,
-    imageUrl: "/shorts-shop-parts/woman(1).jpg?cache=bust" + Math.random(),
+    imageUrl: "/shorts-shop-parts/woman(1).jpg?v=20241220",
     badge: "新商品",
     colors: ["#FFFFFF", "#F8F8FF", "#FFF0F5"],
   },
@@ -80,7 +80,7 @@ const sampleProducts = [
     price: 18500,
     rating: 4.7,
     reviewCount: 123,
-    imageUrl: "/shorts-shop-parts/woman(3).png?cache=bust" + Math.random(),
+    imageUrl: "/shorts-shop-parts/woman(3).png?v=20241220",
     colors: ["#F5F5DC", "#DDA0DD", "#FFB6C1"],
   },
 ];
