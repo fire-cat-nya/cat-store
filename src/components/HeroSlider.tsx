@@ -40,15 +40,38 @@ const slides: SlideData[] = [
   },
 ];
 
+// 背景画像の配列
+const backgroundImages = [
+  "/shorts-shop-parts/slide.png",
+  "/shorts-shop-parts/slide2.jpg",
+];
+
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentBackground, setCurrentBackground] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
+  // スライドコンテンツの切り替え（5秒間隔）
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  // 背景画像の切り替え（3秒表示 + 1.5秒トランジション = 4.5秒サイクル）
+  useEffect(() => {
+    const backgroundTimer = setInterval(() => {
+      setIsTransitioning(true);
+
+      setTimeout(() => {
+        setCurrentBackground((prev) => (prev + 1) % backgroundImages.length);
+        setIsTransitioning(false);
+      }, 1500); // 1.5秒のトランジション時間
+    }, 3000); // 3秒表示
+
+    return () => clearInterval(backgroundTimer);
   }, []);
 
   const nextSlide = () => {
@@ -60,17 +83,34 @@ export default function HeroSlider() {
   };
 
   return (
-    <div
-      className="relative h-[600px] overflow-hidden"
-      style={{
-        backgroundImage: "url(/shorts-shop-parts/slide.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <div className="relative h-[600px] overflow-hidden">
+      {/* 背景画像レイヤー */}
+      <div className="absolute inset-0">
+        {backgroundImages.map((bgImage, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
+              index === currentBackground
+                ? isTransitioning
+                  ? "opacity-0"
+                  : "opacity-100"
+                : index === (currentBackground + 1) % backgroundImages.length &&
+                  isTransitioning
+                ? "opacity-100"
+                : "opacity-0"
+            }`}
+            style={{
+              backgroundImage: `url(${bgImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        ))}
+      </div>
+
       {/* オーバーレイ */}
-      <div className="absolute inset-0 bg-black/20"></div>
+      <div className="absolute inset-0 bg-black/20 z-10"></div>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -79,7 +119,7 @@ export default function HeroSlider() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -300 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 flex items-center relative z-10"
+          className="absolute inset-0 flex items-center relative z-20"
         >
           <div className="container mx-auto px-8 flex items-center">
             {/* Content */}
@@ -152,20 +192,20 @@ export default function HeroSlider() {
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-20"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-30"
       >
         <ChevronLeft className="w-6 h-6 text-gray-700" />
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-20"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-30"
       >
         <ChevronRight className="w-6 h-6 text-gray-700" />
       </button>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-30">
         {slides.map((_, index) => (
           <button
             key={index}
