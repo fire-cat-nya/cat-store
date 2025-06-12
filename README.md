@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CAT NYAA STORE (Amazon model) EC サイト
 
-## Getting Started
+Next.js、TypeScript、Tailwind CSS を使用したランジェリー専門 EC サイトです。
 
-First, run the development server:
+## 🎯 機能
+
+### ✅ 実装済み
+
+- レスポンシブな UI/UX
+- 商品一覧表示（グリッドレイアウト）
+- 商品カード（価格、評価、カラーバリエーション）
+- ヒーロースライダー（背景画像トランジション付き）
+- インタラクティブなアニメーション（Framer Motion）
+- ウィッシュリスト機能（ハート）
+- 商品ホバーエフェクト
+
+### 🚧 準備中
+
+- ユーザー認証 (Clerk)
+- ショッピングカート機能
+- 商品詳細ページ
+- 決済システム (Stripe)
+- 注文履歴
+- 商品検索・フィルター機能
+
+## 🛠️ 技術スタック
+
+| カテゴリ           | 技術          | バージョン |
+| ------------------ | ------------- | ---------- |
+| **フレームワーク** | Next.js       | 15.3.3     |
+| **言語**           | TypeScript    | ^5         |
+| **スタイリング**   | Tailwind CSS  | ^4         |
+| **アニメーション** | Framer Motion | ^12.16.0   |
+| **アイコン**       | Lucide React  | ^0.513.0   |
+| **認証**           | Clerk         | (準備中)   |
+| **決済**           | Stripe        | (準備中)   |
+| **データベース**   | Firebase      | (準備中)   |
+
+## 🚀 開始方法
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+````
+
+### 2. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを確認してください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### 4. 本番サーバーの起動
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 プロジェクト構成
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── globals.css          # グローバルスタイル
+│   ├── layout.tsx           # ルートレイアウト
+│   └── page.tsx             # ホームページ
+├── components/
+│   ├── Header.tsx           # ヘッダーコンポーネント
+│   ├── HeroSlider.tsx       # メインスライダー
+│   ├── ProductGrid.tsx      # 商品グリッド
+│   ├── ProductCard.tsx      # 商品カード
+│   └── Footer.tsx           # フッターコンポーネント
+├── contexts/                # React Context
+└── public/
+    └── shorts-shop-parts/   # 商品画像・素材
+```
 
-## Deploy on Vercel
+## 🎨 デザイン特徴
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **レスポンシブデザイン**: モバイルファーストアプローチ
+- **アニメーション**: Framer Motion による滑らかなトランジション
+- **カラーパレット**: ピンク・パープルグラデーション
+- **背景切り替え**: 3 秒表示 + 1.5 秒トランジション
+- **ホバーエフェクト**: 商品カードの立体的な動き
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📋 今後の実装予定
+
+### Phase 1: 基本機能
+
+- [ ] *特注：オーナーモード（顧客管理）
+- [ ] ユーザー認証システム (Clerk)
+- [ ] ショッピングカート機能
+- [ ] 商品詳細ページ
+- [ ] 商品検索機能
+
+### Phase 2: 高度な機能
+
+- [ ] Stripe 決済システム
+- [ ] 注文履歴機能
+- [ ] レビュー・評価システム
+- [ ] 商品カテゴリフィルター
+
+### Phase 3: 拡張機能
+
+- [ ] お気に入り機能
+- [ ] 商品比較機能
+- [ ] クーポン・割引システム
+- [ ] モバイルアプリ対応
+
+## 🔧 開発環境
+
+- **Node.js**: 18.x 以上
+- **npm**: 最新版
+- **ブラウザ**: Chrome, Firefox, Safari, Edge
+
+## 📝 ライセンス
+
+MIT License
+
+## 🤝 コントリビューション
+
+プルリクエストやイシューの報告を歓迎します。
+
+---
+
+**CAT NYAA STORE** - エレガントなランジェリーショッピング体験を提供
+
+```
+
+## 📋 **主な更新内容**
+
+### ✅ **プロジェクト固有の情報を追加**
+- ランジェリー専門ECサイトとして明記
+- 実装済み機能の詳細化
+- 現在の技術スタック（package.jsonベース）
+
+### ✅ **実際のコンポーネント構成を反映**
+- HeroSlider、ProductGrid、ProductCard等
+- 背景画像トランジション機能
+- Framer Motionアニメーション
+
+### ✅ **視覚的な改善**
+- 絵文字とテーブル形式の採用
+- フェーズ別の実装予定
+- デザイン特徴の明記
+
+```
+````
