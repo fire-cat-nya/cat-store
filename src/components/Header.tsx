@@ -2,9 +2,21 @@
 
 import { Search, ShoppingCart, MapPin } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Header() {
   const { currentTheme, switchTheme } = useTheme();
+  const colors = [
+    currentTheme.colors.primary,
+    currentTheme.colors.secondary,
+    currentTheme.colors.accent,
+    currentTheme.colors.text,
+  ];
+
+  const handleLanguageChange = () => {
+    switchTheme();
+  };
 
   return (
     <header
@@ -70,10 +82,25 @@ export default function Header() {
 
           {/* Language switcher */}
           <button
-            onClick={switchTheme}
-            className="bg-white text-black px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors mr-4"
+            onClick={handleLanguageChange}
+            className="relative w-8 h-8 flex items-center justify-center mr-4"
+            aria-label="言語切り替え"
           >
-            JP
+            {/* 外側の円 */}
+            <div className="absolute inset-0 border-2 border-current rounded-full" />
+            {/* 内側の4つの円 */}
+            <div className="absolute inset-1 rounded-full overflow-hidden">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                {/* 右上（1） */}
+                <circle cx="65" cy="35" r="18" fill="#facc15" />
+                {/* 右下（2） */}
+                <circle cx="65" cy="65" r="18" fill="#be123c" />
+                {/* 左下（3） */}
+                <circle cx="35" cy="65" r="18" fill="#ffffff" />
+                {/* 左上（4） */}
+                <circle cx="35" cy="35" r="18" fill="#047857" />
+              </svg>
+            </div>
           </button>
 
           {/* Right side icons */}
