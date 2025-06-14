@@ -40,3 +40,4 @@ next-env.d.ts
 
 # custom folders
 .cursor
+/src/generated/prisma

@@ -44,8 +44,6 @@ Next.js、TypeScript、Tailwind CSS を使用したランジェリー専門 EC �
 npm install
 ```
 
-````
-
 ### 2. 開発サーバーの起動
 
 ```bash
@@ -134,24 +132,22 @@ MIT License
 
 **CAT NYAA STORE** - エレガントなランジェリーショッピング体験を提供
 
-```
-
 ## 📋 **主な更新内容**
 
 ### ✅ **プロジェクト固有の情報を追加**
-- ランジェリー専門ECサイトとして明記
+
+- ランジェリー専門 EC サイトとして明記
 - 実装済み機能の詳細化
-- 現在の技術スタック（package.jsonベース）
+- 現在の技術スタック（package.json ベース）
 
 ### ✅ **実際のコンポーネント構成を反映**
-- HeroSlider、ProductGrid、ProductCard等
+
+- HeroSlider、ProductGrid、ProductCard 等
 - 背景画像トランジション機能
-- Framer Motionアニメーション
+- Framer Motion アニメーション
 
 ### ✅ **視覚的な改善**
+
 - 絵文字とテーブル形式の採用
 - フェーズ別の実装予定
 - デザイン特徴の明記
-
-```
-````

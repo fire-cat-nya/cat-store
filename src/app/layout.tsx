@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { NextAuthProvider } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,21 +9,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CatNyaa - プレミアムランジェリーストア",
-  description: "最高品質のランジェリーとナイトウェアをお届けします",
+  title: "CAT NYA",
+  description: "猫のためのECサイト",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ja">
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col font-sans`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
   );

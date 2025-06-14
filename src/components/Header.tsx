@@ -4,6 +4,7 @@ import { Search, ShoppingCart, MapPin } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const { currentTheme, switchTheme } = useTheme();
@@ -13,6 +14,9 @@ export default function Header() {
     currentTheme.colors.accent,
     currentTheme.colors.text,
   ];
+
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   const handleLanguageChange = () => {
     switchTheme();
@@ -135,6 +139,66 @@ export default function Header() {
           <button className="hover:underline">ギフトカード</button>
           <button className="hover:underline">売る</button>
         </div>
+      </div>
+
+      {/* Account menu */}
+      <div className="relative">
+        <button
+          className="text-gray-700 hover:text-pink-600 focus:outline-none"
+          onMouseEnter={() => setIsAccountMenuOpen(true)}
+          onMouseLeave={() => setIsAccountMenuOpen(false)}
+        >
+          アカウント & リスト
+        </button>
+
+        {isAccountMenuOpen && (
+          <div
+            className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+            onMouseEnter={() => setIsAccountMenuOpen(true)}
+            onMouseLeave={() => setIsAccountMenuOpen(false)}
+          >
+            {session ? (
+              <>
+                <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                  {session.user?.name || session.user?.email}
+                </div>
+                <Link
+                  href="/orders"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  注文履歴
+                </Link>
+                <Link
+                  href="/profile"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  プロフィール設定
+                </Link>
+                <button
+                  onClick={() => signOut()}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  サインアウト
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/signin"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  サインイン
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  新規登録
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );
