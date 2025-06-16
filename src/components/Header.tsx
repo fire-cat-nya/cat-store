@@ -8,12 +8,6 @@ import { useSession, signOut } from "next-auth/react";
 
 export default function Header() {
   const { currentTheme, switchTheme } = useTheme();
-  const colors = [
-    currentTheme.colors.primary,
-    currentTheme.colors.secondary,
-    currentTheme.colors.accent,
-    currentTheme.colors.text,
-  ];
 
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const { data: session } = useSession();
@@ -33,7 +27,21 @@ export default function Header() {
             <span>配送先: 日本</span>
           </div>
           <div className="flex items-center space-x-4">
-            <span>こんにちは、サインイン</span>
+            {session ? (
+              <button
+                onClick={() => signOut()}
+                className="hover:underline cursor-pointer"
+              >
+                ログアウト
+              </button>
+            ) : (
+              <Link
+                href="/auth/signup"
+                className="hover:underline cursor-pointer"
+              >
+                こんにちは、サインイン
+              </Link>
+            )}
             <span>注文履歴</span>
             <span>カート</span>
           </div>
@@ -111,7 +119,27 @@ export default function Header() {
           <div className="flex items-center space-x-6">
             <div className="text-sm">
               <div className="text-gray-300">こんにちは</div>
-              <div className="font-bold">アカウント&リスト</div>
+              {session ? (
+                <div className="font-bold">
+                  {(() => {
+                    const name =
+                      session.user?.name || session.user?.email || "";
+                    if (name === "YASUNORI NAKATA") {
+                      return "Ｎ・YASUNORI さま";
+                    }
+                    // 全角・半角混在対応: 6文字まで取得
+                    const sliced = Array.from(name).slice(0, 6).join("");
+                    return `${sliced} さま`;
+                  })()}
+                </div>
+              ) : (
+                <Link
+                  href="/auth/signin"
+                  className="font-bold hover:underline cursor-pointer"
+                >
+                  ログイン
+                </Link>
+              )}
             </div>
 
             <div className="text-sm">
@@ -148,7 +176,16 @@ export default function Header() {
           onMouseEnter={() => setIsAccountMenuOpen(true)}
           onMouseLeave={() => setIsAccountMenuOpen(false)}
         >
-          アカウント & リスト
+          {session
+            ? (() => {
+                const name = session.user?.name || session.user?.email || "";
+                if (name === "YASUNORI NAKATA") {
+                  return "Ｎ・YASUNORI さま";
+                }
+                const sliced = Array.from(name).slice(0, 6).join("");
+                return `${sliced} さま`;
+              })()
+            : "ログイン"}
         </button>
 
         {isAccountMenuOpen && (
